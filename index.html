@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>同频共学｜校园兴趣共学平台</title>
+  <link rel="stylesheet" href="资源/样式.css" />
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <section class="auth-screen" id="auth-screen" hidden>
+    <div class="auth-bg-mark">同频共学</div>
+    <div class="auth-card ornate-card">
+      <div class="auth-brand">
+        <span class="brand-mark">同</span>
+        <div>
+          <p class="eyebrow">校园内部试运行</p>
+          <h1>先登录，再进入你的共学空间。</h1>
+          <p class="subtle">注册后，兴趣方向、加入的小组、收藏的资源和打卡记录都会绑定到当前账号。当前版本用浏览器本地数据模拟真实后端，后续可直接替换为数据库接口。</p>
+        </div>
+      </div>
+
+      <div class="auth-tabs" role="tablist" aria-label="登录注册切换">
+        <button class="active" id="show-login" type="button">登录</button>
+        <button id="show-register" type="button">注册</button>
+      </div>
+
+      <form class="auth-form" id="login-form">
+        <label>账号<input id="login-account" autocomplete="username" placeholder="请输入账号" required></label>
+        <label>密码<input id="login-password" type="password" autocomplete="current-password" placeholder="请输入密码" required></label>
+        <button class="btn primary wide" type="submit">进入平台</button>
+        <button class="btn wide" id="demo-login" type="button">使用演示账号进入</button>
+        <p class="auth-tip">演示账号：demo　密码：123456</p>
+      </form>
+
+      <form class="auth-form" id="register-form" hidden>
+        <div class="auth-form-grid">
+          <label>账号<input id="reg-account" autocomplete="username" placeholder="建议用学号或常用昵称" required></label>
+          <label>密码<input id="reg-password" type="password" autocomplete="new-password" placeholder="至少六位" required></label>
+          <label>昵称<input id="reg-name" placeholder="例如：林知夏" required></label>
+          <label>学校<input id="reg-school" placeholder="例如：南京大学"></label>
+          <label>学院<input id="reg-college" placeholder="例如：计算机学院"></label>
+          <label>年级<input id="reg-grade" placeholder="例如：大二 / 研一"></label>
+          <label class="full-row">兴趣方向<input id="reg-tags" placeholder="用顿号或逗号分隔，例如：数学建模、科研阅读、英语口语"></label>
+          <label class="full-row">个人目标<textarea id="reg-intro" placeholder="简单写下你希望在平台里坚持什么"></textarea></label>
+        </div>
+        <button class="btn primary wide" type="submit">完成注册并进入</button>
+      </form>
+    </div>
+  </section>
+
+  <header class="topbar">
+    <button class="brand" data-go="home" aria-label="返回首页">
+      <span class="brand-mark">同</span>
+      <span>
+        <strong>同频共学</strong>
+        <small>校园兴趣共学平台</small>
+      </span>
+    </button>
+    <nav class="nav" aria-label="主导航">
+      <button class="nav-item active" data-go="home">首页</button>
+      <button class="nav-item" data-go="map">兴趣地图</button>
+      <button class="nav-item" data-go="groups">共学小组</button>
+      <button class="nav-item" data-go="checkin">今日打卡</button>
+      <button class="nav-item" data-go="resources">资源书院</button>
+      <button class="nav-item" data-go="forum">交流庭院</button>
+      <button class="nav-item" data-go="profile">成长档案</button>
+      <button class="nav-item highlight" data-go="agent">智能学伴</button>
+    </nav>
+    <button class="profile-chip" data-go="profile">
+      <span class="avatar" id="top-avatar">同</span>
+      <span id="top-user-name">未登录</span>
+    </button>
+    <button class="btn small logout-btn" id="logout-btn" type="button">退出</button>
+  </header>
+
+  <main id="app">
+    <section class="page active" id="home">
+      <div class="hero shell">
+        <div class="hero-copy">
+          <p class="eyebrow">把一个人的坚持，变成一群人的节奏</p>
+          <h1>一张兴趣地图，连接校园里的同频学习伙伴。</h1>
+          <p class="lead">从兴趣选择到加入小组，从资源沉淀到每日打卡，再到组内交流与成长记录，形成完整的共学闭环。</p>
+          <div class="hero-actions">
+            <button class="btn primary large" data-go="map">进入兴趣地图</button>
+            <button class="btn ghost large" data-go="groups">浏览共学小组</button>
+          </div>
+          <div class="trust-row">
+            <span>兴趣匹配</span><span>小组陪伴</span><span>资源共建</span><span>连续打卡</span><span>成长档案</span>
+          </div>
+        </div>
+        <div class="hero-panel ornate-card">
+          <div class="panel-head">
+            <span>今日校园共学状态</span>
+            <strong>正在发生</strong>
+          </div>
+          <div class="live-stack" id="home-live"></div>
+          <div class="mini-map-preview">
+            <span style="--c:#c46b58"></span><span style="--c:#e1ad54"></span><span style="--c:#4c8f7b"></span><span style="--c:#677bb7"></span><span style="--c:#a06aa4"></span><span style="--c:#7a9e5b"></span>
+          </div>
+        </div>
+      </div>
+      <div class="shell metrics-grid" id="metrics"></div>
+      <div class="shell section-head">
+        <p class="eyebrow">推荐入口</p>
+        <h2>先看地图，再进小组，最后留下学习痕迹。</h2>
+      </div>
+      <div class="shell feature-grid">
+        <article class="feature-card" data-go="map"><span>壹</span><h3>兴趣地图</h3><p>大面积视觉入口，一级兴趣像城市街区，点击后展开细分方向与推荐小组。</p></article>
+        <article class="feature-card" data-go="groups"><span>贰</span><h3>共学小组</h3><p>按目标、周期、人数和活跃度筛选，快速加入合适的小组。</p></article>
+        <article class="feature-card" data-go="checkin"><span>叁</span><h3>打卡陪伴</h3><p>记录主题、时长、状态与心情，小组墙同步展示，监督感更自然。</p></article>
+        <article class="feature-card" data-go="agent"><span>肆</span><h3>智能学伴</h3><p>根据兴趣、时间和阶段生成今日计划，给出小组与资源建议。</p></article>
+      </div>
+    </section>
+
+    <section class="page" id="map">
+      <div class="shell page-title-row">
+        <div>
+          <p class="eyebrow">全校兴趣地图</p>
+          <h2>像逛一座校园知识城一样，找到你的方向。</h2>
+          <p class="subtle">横向滚动查看完整地图。点击色块后，会展开细分方向、推荐小组和行动按钮。</p>
+        </div>
+        <div class="map-tools">
+          <button class="btn small" id="center-map">回到中心</button>
+          <button class="btn small primary" data-go="agent">让智能学伴安排今天</button>
+        </div>
+      </div>
+      <div class="shell map-layout">
+        <div class="map-stage" id="map-stage" aria-label="兴趣地图区域">
+          <div class="map-canvas" id="map-canvas"></div>
+        </div>
+        <aside class="map-drawer ornate-card" id="map-drawer">
+          <div class="empty-state">
+            <span class="empty-icon">✦</span>
+            <h3>选择一块兴趣方砖</h3>
+            <p>这里会显示二级方向、推荐小组、适合资源和今日行动建议。</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="page" id="groups">
+      <div class="shell page-title-row">
+        <div>
+          <p class="eyebrow">共学小组</p>
+          <h2>目标清楚、人数合适、氛围稳定的小组，才值得加入。</h2>
+        </div>
+        <button class="btn primary" id="open-create-group">创建小组</button>
+      </div>
+      <div class="shell filter-bar">
+        <input id="group-search" class="input" placeholder="搜索小组、兴趣或目标" />
+        <div class="chip-row" id="group-filter"></div>
+      </div>
+      <div class="shell group-grid" id="group-list"></div>
+    </section>
+
+    <section class="page" id="checkin">
+      <div class="shell page-title-row">
+        <div>
+          <p class="eyebrow">今日打卡</p>
+          <h2>把学习动作留下来，让坚持被看见。</h2>
+        </div>
+        <div class="streak-card"><span>连续打卡</span><strong id="streak-count">十二天</strong></div>
+      </div>
+      <div class="shell split-layout">
+        <form class="form-card ornate-card" id="checkin-form">
+          <h3>提交今日记录</h3>
+          <label>所属小组<select id="checkin-group"></select></label>
+          <label>学习主题<input id="checkin-title" required placeholder="例如：完成线性代数第三章整理" /></label>
+          <label>学习时长<input id="checkin-duration" type="number" min="5" max="600" required placeholder="分钟" /></label>
+          <label>完成状态<select id="checkin-status"><option>完成</option><option>部分完成</option><option>需要补做</option></select></label>
+          <label>今日心情<select id="checkin-mood"><option>顺利</option><option>平稳</option><option>吃力</option><option>很有收获</option></select></label>
+          <label>学习内容<textarea id="checkin-content" required placeholder="写下今天具体做了什么，越真实越好。"></textarea></label>
+          <button class="btn primary wide" type="submit">提交打卡</button>
+        </form>
+        <div class="wall-panel">
+          <div class="section-head compact"><p class="eyebrow">小组打卡墙</p><h3>今天已经有人开始行动</h3></div>
+          <div class="timeline" id="checkin-wall"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="resources">
+      <div class="shell resource-console">
+        <div class="resource-intro">
+          <p class="eyebrow">资源书院</p>
+          <h2>把资料沉淀成可复用的学习资产。</h2>
+          <p class="subtle">每一份资料都绑定方向、小组和使用场景。先找到资源，再回到小组打卡、讨论和复盘。</p>
+          <div class="resource-metrics" id="resource-metrics"></div>
+        </div>
+        <aside class="resource-command ornate-card">
+          <h3>资源操作台</h3>
+          <p>收录前写清楚适用对象、使用方式和所属方向。平台优先保存资源说明与链接，不直接堆放大文件。</p>
+          <div class="command-actions">
+            <button class="btn primary wide" id="open-resource-box">收录资源</button>
+            <button class="btn wide" id="resource-only-collect">只看我的收藏</button>
+            <button class="btn wide" id="resource-guide">查看收录规范</button>
+          </div>
+        </aside>
+      </div>
+
+      <div class="shell resource-toolbar ornate-card">
+        <div class="resource-search-line">
+          <input id="resource-search" class="input" placeholder="搜索资源名称、方向、小组或收录人" />
+          <select id="resource-sort" class="input resource-sort" aria-label="资源排序">
+            <option>精选优先</option>
+            <option>最新发布</option>
+            <option>收藏最多</option>
+            <option>适合新手</option>
+          </select>
+        </div>
+        <div class="resource-catalog">
+          <div class="catalog-title">
+            <strong>方向目录</strong>
+            <span>一级方向决定资源归属，二级方向帮助快速定位。</span>
+          </div>
+          <div class="chip-row" id="resource-filter"></div>
+          <div class="chip-row fine" id="resource-subfilter"></div>
+        </div>
+      </div>
+
+      <div class="shell resource-featured" id="resource-featured"></div>
+
+      <div class="shell resource-list-head">
+        <div>
+          <p class="eyebrow">资源目录</p>
+          <h3>按目标检索，而不是在资料堆里翻找。</h3>
+        </div>
+        <span id="resource-result-count" class="result-count"></span>
+      </div>
+      <div class="shell resource-grid" id="resource-list"></div>
+    </section>
+
+    <section class="page" id="forum">
+      <div class="shell page-title-row">
+        <div>
+          <p class="eyebrow">交流庭院</p>
+          <h2>围绕问题交流，不让学习内容淹没在闲聊里。</h2>
+        </div>
+        <button class="btn primary" id="open-post-box">发布讨论</button>
+      </div>
+      <div class="shell forum-layout">
+        <div class="post-list" id="post-list"></div>
+        <aside class="ornate-card side-note">
+          <h3>庭院守则</h3>
+          <p>每条讨论尽量对应一个具体问题、一个学习阶段或一个资源反馈。小组负责人可以置顶高质量内容。</p>
+          <div class="rule-list"><span>问题清楚</span><span>经验可复用</span><span>资源有来源</span><span>鼓励不灌水</span></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="page" id="profile">
+      <div class="shell page-title-row">
+        <div>
+          <p class="eyebrow">成长档案</p>
+          <h2>把零散努力整理成可展示的学习履历。</h2>
+        </div>
+        <button class="btn" id="reset-demo">恢复演示数据</button>
+      </div>
+      <div class="shell profile-grid">
+        <article class="ornate-card profile-card">
+          <div class="big-avatar" id="profile-avatar">同</div>
+          <h3 id="profile-name">未登录</h3>
+          <p id="profile-meta">请先登录</p>
+          <div class="tag-cloud" id="profile-tags"></div>
+        </article>
+        <article class="ornate-card stats-card"><h3>学习统计</h3><div id="profile-stats"></div></article>
+        <article class="ornate-card chart-card"><h3>近七日学习时长</h3><div class="bar-chart" id="bar-chart"></div></article>
+        <article class="ornate-card rank-card"><h3>本周小组榜</h3><div id="rank-list"></div></article>
+      </div>
+    </section>
+
+    <section class="page" id="agent">
+      <div class="shell page-title-row">
+        <div>
+          <p class="eyebrow">智能学伴</p>
+          <h2>不替你学习，只帮你把今天变得更容易开始。</h2>
+          <p class="subtle">本演示版采用本地规则生成，不需要联网。后续可以替换为真实智能接口。</p>
+        </div>
+      </div>
+      <div class="shell agent-layout">
+        <div class="ornate-card agent-card">
+          <div class="agent-orb">伴</div>
+          <h3>今日计划生成器</h3>
+          <label>今天可投入时间<input id="agent-minutes" type="number" value="90" min="20" max="360" /></label>
+          <label>当前状态<select id="agent-state"><option>想开始但有点乱</option><option>时间不多，需要高效</option><option>需要冲刺</option><option>想稳定坚持</option></select></label>
+          <label>重点方向<select id="agent-focus"></select></label>
+          <button class="btn primary wide" id="make-plan">生成今日共学方案</button>
+        </div>
+        <div class="agent-output" id="agent-output"></div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-layer" id="modal-layer" hidden>
+    <div class="modal ornate-card" role="dialog" aria-modal="true">
+      <button class="modal-close" id="modal-close" aria-label="关闭">×</button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="资源/逻辑.js"></script>
+</body>
+</html>
