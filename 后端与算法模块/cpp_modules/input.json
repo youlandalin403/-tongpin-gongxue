@@ -1,0 +1,15 @@
+{
+  "group_id": 1,
+  "type": "week",
+  "top_n": 10,
+  "users": [
+    {
+      "user_id": 1,
+      "nickname": "测试用户",
+      "score": 23,
+      "continuous_days": 1,
+      "total_duration": 90,
+      "last_checkin_time": "2026-06-06 18:20:31"
+    }
+  ]
+}

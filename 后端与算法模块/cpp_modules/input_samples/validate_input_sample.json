@@ -1,0 +1,24 @@
+{
+  "duration": 80,
+  "content": "今天完成了 Python 函数和列表练习，并整理了相关笔记。",
+  "continuous_days": 7,
+  "groups": [
+    {
+      "group_id": 1,
+      "group_name": "Python 30天入门组",
+      "current_member": 30,
+      "max_member": 50,
+      "today_checkin_count": 20
+    }
+  ],
+  "users": [
+    {
+      "user_id": 1,
+      "nickname": "小林",
+      "score": 268,
+      "continuous_days": 12,
+      "total_duration": 2100,
+      "last_checkin_time": "2026-06-02 09:30:00"
+    }
+  ]
+}

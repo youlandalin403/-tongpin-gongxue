@@ -1,0 +1,146 @@
+========================================
+    同频共学 - 后端运行说明
+    最后更新：2026年6月6日
+========================================
+
+一、项目结构
+
+ConnectHer/
+├── cpp_modules/           # C++ 算法模块（不要动）
+│   ├── algorithm.exe      # 核心算法程序
+│   └── ...
+├── pages/                 # 前端页面（美工在这里写）
+│   └── （你的 .py 文件）
+├── user_service.py        # 用户登录注册
+├── group_service.py       # 小组相关
+├── checkin_service.py     # 打卡相关
+├── post_service.py        # 帖子评论
+├── resource_service.py    # 资源收藏
+├── auth_service.py        # 权限控制
+├── cpp_runner.py          # C++ 调用封装
+├── init_db.py             # 初始化数据库
+├── init.sql               # 建表语句
+├── app.db                 # 数据库文件（运行 init_db.py 生成）
+└── main.py                # 入口文件（需要创建）
+
+
+二、第一次运行（初始化）
+
+1. 打开终端（cmd 或 VS Code 终端）
+2. 进入项目目录：cd D:\你的路径\ConnectHer
+3. 安装依赖：pip install streamlit
+4. 初始化数据库：python init_db.py
+   成功后会在当前目录生成 app.db 文件
+
+
+三、启动项目
+
+方法一（推荐）：
+在终端输入：streamlit run main.py
+
+方法二：
+如果还没有 main.py，可以直接运行某个页面测试，例如：
+streamlit run pages/login.py
+
+
+四、后端函数速查表（给美工同学）
+
+【用户模块】
+register(username, password, nick)     # 注册
+login(username, password)              # 登录
+save_user_tag(uid, tag_list)           # 保存兴趣标签
+get_user_tag(uid)                      # 获取兴趣标签
+
+【小组模块】
+create_group(uid, name, desc, tag)     # 创建小组
+get_all_group(filter_tag)              # 获取小组列表
+get_group_detail(gid)                  # 获取小组详情
+join_group(uid, gid)                   # 加入小组
+get_user_join_group(uid)               # 我的小组
+
+【打卡模块】
+checkin(uid, gid, title, content, duration)   # 打卡
+get_today_checkin_status(uid, gid)            # 今日是否打卡
+get_group_checkin_today(gid)                  # 小组打卡墙
+get_user_checkin_history(uid)                 # 我的打卡记录
+
+【资源模块】
+upload_resource(uid, gid, name, desc, url)    # 上传资源
+get_resources_by_group(gid)                   # 小组资源
+get_all_resources()                           # 全部资源
+collect_resource(uid, rid)                    # 收藏资源
+get_user_collections(uid)                     # 我的收藏
+
+【帖子模块】
+create_post(uid, gid, title, content)         # 发布帖子
+get_posts_by_group(gid)                       # 小组帖子列表
+get_post_detail(pid)                          # 帖子详情
+add_comment(uid, pid, content)                # 添加评论
+like_post(uid, pid)                           # 点赞
+
+【权限模块】
+is_admin(uid)                                 # 是否管理员
+is_group_member(uid, gid)                     # 是否小组成员
+can_manage_group(uid, gid)                    # 是否有管理权限
+
+
+五、返回值格式
+
+所有函数返回的都是字典（dict）格式：
+
+成功时：{"success": True, "msg": "...", 其他数据...}
+失败时：{"success": False, "msg": "错误原因"}
+
+示例：
+result = login("admin", "123456")
+if result["success"]:
+    uid = result["uid"]
+    st.success("登录成功")
+else:
+    st.error(result["msg"])
+
+
+六、页面开发示例（登录页）
+
+创建 pages/login.py：
+
+import streamlit as st
+from user_service import login
+
+st.set_page_config(page_title="登录")
+st.title("同频共学")
+
+username = st.text_input("用户名")
+password = st.text_input("密码", type="password")
+
+if st.button("登录"):
+    if username and password:
+        result = login(username, password)
+        if result["success"]:
+            st.session_state["uid"] = result["uid"]
+            st.success("登录成功")
+            st.switch_page("pages/home.py")
+        else:
+            st.error(result["msg"])
+    else:
+        st.warning("请填写完整")
+
+
+七、常见问题
+
+Q1: 提示 No module named 'xxx'
+A1: 检查文件名是否正确，比如 user_service.py 不能叫 user.py
+
+Q2: 提示 no such table
+A2: 运行 python init_db.py 重新初始化数据库
+
+Q3: C++ 算法调用失败
+A3: 确认 cpp_modules/algorithm.exe 存在，且电脑安装了 Visual C++ 运行库
+
+Q4: 数据库 locked
+A4: 关闭其他正在访问 app.db 的程序
+
+
+八、联系我
+
+有问题随时在群里问，我会配合修改。

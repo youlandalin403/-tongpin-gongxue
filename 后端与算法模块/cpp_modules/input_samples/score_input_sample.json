@@ -1,0 +1,8 @@
+{
+  "user_id": 1,
+  "group_id": 2,
+  "duration": 80,
+  "content": "今天完成了 Python 函数和列表练习，并整理了相关笔记。",
+  "continuous_days": 7,
+  "is_duplicate_today": false
+}

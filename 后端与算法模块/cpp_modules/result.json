@@ -1,0 +1,19 @@
+{
+  "data": {
+    "ranking": [
+      {
+        "avatar": "",
+        "continuous_days": 1,
+        "last_checkin_time": "2026-06-06 18:20:31",
+        "nickname": "测试用户",
+        "rank": 1,
+        "score": 23,
+        "total_duration": 90,
+        "user_id": 1
+      }
+    ],
+    "type": "week"
+  },
+  "mode": "ranking",
+  "success": true
+}

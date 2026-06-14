@@ -1,0 +1,43 @@
+{
+  "group_id": 2,
+  "type": "week",
+  "top_n": 10,
+  "users": [
+    {
+      "user_id": 1,
+      "nickname": "小林",
+      "avatar": "",
+      "score": 268,
+      "continuous_days": 12,
+      "total_duration": 2100,
+      "last_checkin_time": "2026-06-02 09:30:00"
+    },
+    {
+      "user_id": 2,
+      "nickname": "小陈",
+      "avatar": "",
+      "score": 240,
+      "continuous_days": 10,
+      "total_duration": 1860,
+      "last_checkin_time": "2026-06-02 10:10:00"
+    },
+    {
+      "user_id": 3,
+      "nickname": "小王",
+      "avatar": "",
+      "score": 240,
+      "continuous_days": 8,
+      "total_duration": 2160,
+      "last_checkin_time": "2026-06-02 08:20:00"
+    },
+    {
+      "user_id": 4,
+      "nickname": "小周",
+      "avatar": "",
+      "score": 220,
+      "continuous_days": 15,
+      "total_duration": 2400,
+      "last_checkin_time": "2026-06-02 07:50:00"
+    }
+  ]
+}

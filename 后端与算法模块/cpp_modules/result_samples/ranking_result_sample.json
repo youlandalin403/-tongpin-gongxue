@@ -1,0 +1,49 @@
+{
+  "data": {
+    "ranking": [
+      {
+        "avatar": "",
+        "continuous_days": 12,
+        "last_checkin_time": "2026-06-02 09:30:00",
+        "nickname": "小林",
+        "rank": 1,
+        "score": 268,
+        "total_duration": 2100,
+        "user_id": 1
+      },
+      {
+        "avatar": "",
+        "continuous_days": 10,
+        "last_checkin_time": "2026-06-02 10:10:00",
+        "nickname": "小陈",
+        "rank": 2,
+        "score": 240,
+        "total_duration": 1860,
+        "user_id": 2
+      },
+      {
+        "avatar": "",
+        "continuous_days": 8,
+        "last_checkin_time": "2026-06-02 08:20:00",
+        "nickname": "小王",
+        "rank": 3,
+        "score": 240,
+        "total_duration": 2160,
+        "user_id": 3
+      },
+      {
+        "avatar": "",
+        "continuous_days": 15,
+        "last_checkin_time": "2026-06-02 07:50:00",
+        "nickname": "小周",
+        "rank": 4,
+        "score": 220,
+        "total_duration": 2400,
+        "user_id": 4
+      }
+    ],
+    "type": "week"
+  },
+  "mode": "ranking",
+  "success": true
+}

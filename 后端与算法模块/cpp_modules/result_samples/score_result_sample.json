@@ -1,0 +1,14 @@
+{
+  "data": {
+    "base_score": 10,
+    "checkin_score": 28,
+    "content_length": 74,
+    "content_score": 5,
+    "duration_score": 8,
+    "message": "score calculated",
+    "streak_score": 5,
+    "valid": true
+  },
+  "mode": "score",
+  "success": true
+}

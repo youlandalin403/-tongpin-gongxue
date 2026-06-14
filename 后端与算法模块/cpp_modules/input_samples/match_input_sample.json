@@ -1,0 +1,38 @@
+{
+  "user_id": 1,
+  "user_tags": ["编程", "人工智能", "数学建模"],
+  "joined_group_ids": [3],
+  "top_n": 5,
+  "groups": [
+    {
+      "group_id": 1,
+      "group_name": "Python 30天入门组",
+      "group_tags": ["编程", "Python", "人工智能"],
+      "current_member": 30,
+      "max_member": 50,
+      "today_checkin_count": 20,
+      "resource_count": 12,
+      "post_count": 8
+    },
+    {
+      "group_id": 2,
+      "group_name": "数学建模备赛组",
+      "group_tags": ["数学建模", "竞赛", "论文写作"],
+      "current_member": 18,
+      "max_member": 40,
+      "today_checkin_count": 12,
+      "resource_count": 9,
+      "post_count": 5
+    },
+    {
+      "group_id": 3,
+      "group_name": "四六级听力打卡组",
+      "group_tags": ["四六级", "英语"],
+      "current_member": 35,
+      "max_member": 50,
+      "today_checkin_count": 22,
+      "resource_count": 15,
+      "post_count": 11
+    }
+  ]
+}

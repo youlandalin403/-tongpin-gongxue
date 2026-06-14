@@ -1,0 +1,24 @@
+{
+  "data": [
+    {
+      "active_score": 66.67,
+      "group_id": 1,
+      "group_name": "Python 30天入门组",
+      "match_score": 62.67,
+      "member_score": 40,
+      "reason": "matched_tags_count=2; matched_tags=编程,人工智能",
+      "tag_score": 66.67
+    },
+    {
+      "active_score": 66.67,
+      "group_id": 2,
+      "group_name": "数学建模备赛组",
+      "match_score": 44.92,
+      "member_score": 55,
+      "reason": "matched_tags_count=1; matched_tags=数学建模",
+      "tag_score": 33.33
+    }
+  ],
+  "mode": "match",
+  "success": true
+}
